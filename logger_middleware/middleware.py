@@ -4,10 +4,9 @@ import logging
 import os
 
 import httpx
+from auth_lib.fastapi import UnionAuth
 from fastapi import FastAPI, Request, Response
 from starlette.middleware.base import BaseHTTPMiddleware
-
-from auth_lib.fastapi import UnionAuth
 
 log = logging.getLogger(__name__)
 
@@ -16,6 +15,7 @@ RETRY_DELAYS = [2, 4, 8]  # Задержки перед повторными п�
 
 class LoggerMiddleware(BaseHTTPMiddleware):
     """Нужно прописать если локально env MARKETING_PORT, иначе APP_VERSION"""
+
     __LOGGING_MARKETING_URLS = {
         "dev": f"http://localhost:{os.getenv('MARKETING_PORT', 8000)}/v1/action",
         "test": "https://api.test.profcomff.com/marketing/v1/action",
@@ -47,7 +47,9 @@ class LoggerMiddleware(BaseHTTPMiddleware):
         async with httpx.AsyncClient() as client:
             for attempt, sleep_time in enumerate(RETRY_DELAYS, start=1):
                 try:
-                    response = await client.post(self.__LOGGING_MARKETING_URL, json=log_data)
+                    response = await client.post(
+                        self.__LOGGING_MARKETING_URL, json=log_data
+                    )
 
                     if response.status_code not in {408, 409, 429, 500, 502, 503, 504}:
                         log.info(f"Ответ записи логов: {response.status_code}")

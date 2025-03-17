@@ -2,7 +2,7 @@
 name = "logger-middleware"  # Должно совпадать с именем папки/модуля
 version = "0.1.1"
 description = "Middleware для логирования в FastAPI"
-authors = ["Твоё Имя <email@example.com>"]
+authors = ["DROPDATABASE"]
 packages = [{include = "logger_middleware"}]  # Должно совпадать с именем папки
 license = "MIT"
 
