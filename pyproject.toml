@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "logger-middleware"  # Должно совпадать с именем папки/модуля
+version = "0.1.1"
+description = "Middleware для логирования в FastAPI"
+authors = ["Твоё Имя <email@example.com>"]
+packages = [{include = "logger_middleware"}]  # Должно совпадать с именем папки
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "*"
+fastapi = "*"
+starlette = "*"
+httpx = "*"
+auth-lib-profcomff = {extras = ["fastapi"], version = "*"}
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
