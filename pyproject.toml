@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "logger-middleware"  # Должно совпадать с именем папки/модуля
+version = "0.1.1"
+description = "Middleware для логирования в FastAPI"
+authors = [
+    {name = "profcomff.com", email = "admin@profcomff.com"},
+    {name = "DROPDATABASE", email = ""},
+]
+readme = "README.md"
+packages = [{include = "logger_middleware"}]  # Должно совпадать с именем папки
+license = {file = "LICENSE"}
+
+[tool.poetry.dependencies]
+python = "*"
+fastapi = "*"
+starlette = "*"
+httpx = "*"
+auth-lib-profcomff = {extras = ["fastapi"], version = "*"}
+
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
