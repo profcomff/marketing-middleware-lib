@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "logger_middleware"  # Должно совпадать с именем папки/модуля
-version = "0.1.1"
+version = "0.1.2"
 description = "Middleware для логирования в FastAPI"
 authors = [
     {name = "profcomff.com", email = "admin@profcomff.com"},
