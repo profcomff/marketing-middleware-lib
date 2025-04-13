@@ -2,9 +2,9 @@
 Логирование любо действия в сервисе через middleware
 
 ## Примеры использования
-### Настройки
+### Настройки env переменных
 ```env
-APP_VERSION=dev/test/prod
+APP_VERSION=dev или test или prod
 ```
 Если запускаете локльно(APP_VERSION=dev), то запустить сервис маркетинга на localhost:port и прописать этот порт в env
 ```env
@@ -12,6 +12,9 @@ MARKETING_PORT=8080(либо ваш порт)
 ```
 
 ### FastAPI
+```python
+pip install logger_middleware
+```
 ```python
 from fastapi import FastAPI
 from logger_middleware import LoggerMiddleware
