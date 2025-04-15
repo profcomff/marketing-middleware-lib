@@ -21,7 +21,7 @@ from logger_middleware import LoggerMiddleware
 
 app = FastAPI()
 
-app.add_middleware(LoggerMiddleware)
+app.add_middleware(LoggerMiddleware, sevice_id = 0)
 ```
 
 

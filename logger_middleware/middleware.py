@@ -22,8 +22,10 @@ class LoggerMiddleware(BaseHTTPMiddleware):
         "prod": "https://api.profcomff.com/marketing/v1/action",
     }
 
-    def __init__(self, app: FastAPI):
+    def __init__(self, app: FastAPI, service_id: int):
+        """service_id для уникального id прилодения или сервиса на которого логируем запросы."""
         super().__init__(app)
+        self.service_id = service_id
         self.__LOGGING_MARKETING_URL: str = self.__LOGGING_MARKETING_URLS.get(
             os.getenv("APP_VERSION", "dev"), self.__LOGGING_MARKETING_URLS["test"]
         )
@@ -95,7 +97,7 @@ class LoggerMiddleware(BaseHTTPMiddleware):
             "request": json_body,
         }
         log_data = {
-            "user_id": -3,
+            "user_id": self.service_id,
             "action": request.method,
             "additional_data": json.dumps(additional_data),
             "path_from": "",
