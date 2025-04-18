@@ -6,7 +6,7 @@ from fastapi import Request
 
 from logger_middleware.settings import get_settings
 from logger_middleware.tools.get_user_id import get_user_id
-from logger_middleware.tools.terminal_logger_tools import logger as log
+from logger_middleware.tools.console_logger_tools import logger as log
 
 settings = get_settings()
 

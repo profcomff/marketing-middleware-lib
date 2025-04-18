@@ -1,8 +1,7 @@
 from auth_lib.fastapi import UnionAuth
-from fastapi import HTTPException, Request
-from starlette.status import HTTP_403_FORBIDDEN
+from fastapi import Request
 
-from logger_middleware.tools.terminal_logger_tools import logger as log
+from logger_middleware.tools.console_logger_tools import logger as log
 
 
 async def get_user_id(request: Request):
