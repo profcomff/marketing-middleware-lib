@@ -10,6 +10,10 @@ APP_VERSION=dev или test или prod
 ```env
 MARKETING_PORT=8080(либо ваш порт)
 ```
+Или перед запуском сервиса в терминале
+```env
+export MARKETING_PORT=8080(либо ваш порт)
+```
 
 ### FastAPI
 ```python
