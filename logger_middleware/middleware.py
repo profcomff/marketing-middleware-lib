@@ -1,14 +1,14 @@
 import asyncio
 import json
-import logging
 import os
 
 import httpx
 from auth_lib.fastapi import UnionAuth
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, HTTPException, Request, Response
 from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.status import HTTP_403_FORBIDDEN
 
-log = logging.getLogger(__name__)
+from .logger_tool import logger as log
 
 RETRY_DELAYS = [2, 4, 8]  # Задержки перед повторными попытками
 
@@ -80,11 +80,19 @@ class LoggerMiddleware(BaseHTTPMiddleware):
 
     async def get_user_id(self, request: Request):
         """Получает user_id из UnionAuth."""
-        try:
-            user_id = UnionAuth()(request).get("id")
-        except Exception as e:
-            user_id = -1  # Если ошибка — id не определён
-            log.error(f"USER_AUTH: {e}")
+        authorization = request.headers.get("Authorization")
+        if not authorization:
+            user_id = "Not auth"
+        else:
+            try:
+                user_id = UnionAuth()(request).get("id")
+            except HTTPException as e:
+                if e.status_code == HTTP_403_FORBIDDEN:
+                    log.warning(f"USER_AUTH: Not authenticated — {e.detail}")
+                    return "Not auth"
+            except Exception as e:
+                user_id = -1
+                log.error(f"USER_AUTH: {e}")
 
         return user_id
 
