@@ -1,7 +1,7 @@
 import logging
 
 # Убираем шум
-for noisy_logger in ["httpx", "httpcore"]:
+for noisy_logger in ["httpx", "httpcore", "urllib3"]:
     logging.getLogger(noisy_logger).setLevel(logging.WARNING)
 
 logger = logging.getLogger(__name__)
